@@ -11,7 +11,7 @@ class Item(BaseModel):
     longitude: List[float] = []
 
 
-async def get_data(locs: Item) -> xr.DataArray:
+async def get_data(locs: Item):
     async with Client(DASK_CLUSTER, asynchronous=True) as client:
         zarr_store = r"data/air_rechunked_consolid.zarr"
         da_zr = xr.open_zarr(zarr_store, consolidated=True)['air']
